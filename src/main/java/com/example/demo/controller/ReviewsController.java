@@ -1,19 +1,19 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Reviews;
+import com.example.demo.service.PageService;
+import com.example.demo.service.ReviewsService;
+import com.example.demo.util.ListPage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import model.Reviews;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import service.impl.PageServiceImpl;
-import service.impl.ReviewsServiceImpl;
-import util.ListPage;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,9 +21,9 @@ import java.util.Date;
 @Controller
 public class ReviewsController {
 	@Autowired
-	ReviewsServiceImpl reviewsService;
+	ReviewsService reviewsService;
 	@Autowired
-	PageServiceImpl pageService;
+	PageService pageService;
 
 	@RequestMapping("/reviewspage")
 	public ModelAndView reviewsPage(HttpServletRequest request, HttpServletResponse response) {

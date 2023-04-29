@@ -1,26 +1,29 @@
 package com.example.demo.controller;
 
+import com.example.demo.service.AdminService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import model.Admin;
+import com.example.demo.entity.Admin;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import service.impl.AdminServiceImpl;
-import util.ListPage;
-import util.Tools;
+import com.example.demo.util.ListPage;
+import com.example.demo.util.Tools;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @Controller
 public class AdminController {
 	@Autowired
-	AdminServiceImpl adminService;
+	AdminService adminService;
 
 	@RequestMapping("/adminlogin")
 	public ModelAndView logIn(HttpServletRequest request, HttpSession session, HttpServletResponse response) {

@@ -1,19 +1,19 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.User;
+import com.example.demo.service.*;
+import com.example.demo.util.ListPage;
+import com.example.demo.util.Tools;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import model.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import service.impl.*;
-import util.ListPage;
-import util.Tools;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -24,15 +24,15 @@ import java.util.regex.Pattern;
 @Controller
 public class UserController {
     @Autowired
-    AdminServiceImpl adminService;
+    AdminService adminService;
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
     @Autowired
-    FavoriteServiceImpl favoriteService;
+    FavoriteService favoriteService;
     @Autowired
-    PageServiceImpl pageService;
+    PageService pageService;
     @Autowired
-    ReviewsServiceImpl reviewsService;
+    ReviewsService reviewsService;
 
     @RequestMapping("/userlogin")
     public ModelAndView login(HttpServletRequest request, HttpSession session, HttpServletResponse response) {

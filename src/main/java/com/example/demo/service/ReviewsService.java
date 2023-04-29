@@ -1,21 +1,42 @@
 package com.example.demo.service;
 
-import model.Reviews;
-
 import java.util.ArrayList;
 
+import com.example.demo.entity.Reviews;
+import com.example.demo.mapper.ReviewsMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class ReviewsService {
-	int addReviews(Reviews reviews);
+    ReviewsMapper reviewsMapper;
 
-	ArrayList<Reviews> selectByPage(int id);
-
-    int deleteByID(int id);
-    
-    Reviews selectByID(int ID);
-    
-    ArrayList<Reviews> selectByUserID(int UID);
-    
-    int reviewsNumber(int UID);
-    
-    int deleteByUserID(int ID);
+    public int addReviews(Reviews reviews) {
+        return reviewsMapper.addReviews(reviews);
     }
+
+    public ArrayList<Reviews> selectByPage(int id) {
+        return reviewsMapper.selectByPage(id);
+    }
+
+    public int deleteByID(int id) {
+        return reviewsMapper.deleteByID(id);
+    }
+
+    public Reviews selectByID(int ID) {
+        return reviewsMapper.selectByID(ID);
+    }
+
+        public ArrayList<Reviews> selectByUserID(int UID) {
+        return reviewsMapper.selectByUserID(UID);
+    }
+
+        public int reviewsNumber(int UID) {
+        return reviewsMapper.reviewsNumber(UID);
+    }
+
+    public int deleteByUserID(int ID) {
+        return reviewsMapper.deleteByUserID(ID);
+    }
+
+}

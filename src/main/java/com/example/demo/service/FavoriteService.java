@@ -1,26 +1,51 @@
 package com.example.demo.service;
 
-import model.Favorite;
-
 import java.util.ArrayList;
 
+import com.example.demo.entity.Favorite;
+import com.example.demo.mapper.FavoriteMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class FavoriteService {
-	int addFavorite(Favorite favorite);
+	FavoriteMapper favoriteMapper;
 
-	ArrayList<Favorite> selectByUserID(int id);
+	public int addFavorite(Favorite favorite) {
+		return favoriteMapper.addFavorite(favorite);
+	}
 
-	int deleteByID(int id);
+	public ArrayList<Favorite> selectByUserID(int id) {
+		return favoriteMapper.selectByUserID(id);
+	}
 
-	Favorite selectByID(int id);
+	public int deleteByID(int id) {
+		return favoriteMapper.deleteByID(id);
+	}
 
-	boolean existFavorite(Favorite favorite);
-	
-	int deleteByUserID(int id);
+	public Favorite selectByID(int id) {
+		return favoriteMapper.selectByID(id);
+	}
 
-	int deleteBy2ID(Favorite favorite);
+	public boolean existFavorite(Favorite favorite) {
+		return favoriteMapper.existFavorite(favorite)>0;
+	}
 
-	int favoriteNumber(int id);
+	public int deleteBy2ID(Favorite favorite) {
+		return favoriteMapper.deleteBy2ID(favorite);
 
-	int pagefavoriteNumber(int id);
+	}
+
+	public int favoriteNumber(int id) {
+		return favoriteMapper.favoriteNumber(id);
+	}
+
+	public int pagefavoriteNumber(int id) {
+		return favoriteMapper.pagefavoriteNumber(id);
+	}
+
+	public int deleteByUserID(int id) {
+		return favoriteMapper.deleteByUserID(id);
+	}
 
 }

@@ -1,36 +1,35 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Favorite;
+import com.example.demo.entity.Page;
+import com.example.demo.service.*;
+import com.example.demo.util.ListPage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import model.Favorite;
-import model.Page;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import service.impl.*;
-import util.ListPage;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @Controller
 public class MainController {
 	@Autowired
-	AdminServiceImpl adminService;
+	AdminService adminService;
 	@Autowired
-	UserServiceImpl userService;
+	UserService userService;
 	@Autowired
-	FavoriteServiceImpl favoriteService;
+	FavoriteService favoriteService;
 	@Autowired
-	PageServiceImpl pageService;
+	PageService pageService;
 	@Autowired
-	ReviewsServiceImpl reviewsService;
+	ReviewsService reviewsService;
 	@Autowired
-	PushServiceImpl pushService;
+	PushService pushService;
 
 	@RequestMapping("/index")
 	public ModelAndView index() {

@@ -1,9 +1,11 @@
 package com.example.demo.mapper;
 
-import model.Favorite;
+import com.example.demo.entity.Favorite;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
 
+@Mapper
 public interface FavoriteMapper {
 
 	int addFavorite(Favorite favorite);

@@ -1,24 +1,81 @@
 package com.example.demo.service;
 
-import model.Page;
-import model.Push;
-
 import java.util.ArrayList;
 
+import com.example.demo.entity.Page;
+import com.example.demo.entity.Push;
+import com.example.demo.mapper.PushMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class PushService {
-	int addPush(Push push);
+	PushMapper pushMapper;
+	/* (non-Javadoc)
+	 * @see service.PushService#addPush(model.Push)
+	 */
 
-	ArrayList<Push> search(String keyword);
+	public int addPush(Push push) {
+		// TODO Auto-generated method stub
+		return pushMapper.addPush(push);
+	}
 
-	Push selectByID(int ID);
+	/* (non-Javadoc)
+	 * @see service.PushService#search(java.lang.String)
+	 */
 
-	ArrayList<Push> allPush();
+	public ArrayList<Push> search(String keyword) {
+		// TODO Auto-generated method stub
+		return pushMapper.search(keyword);
+	}
 
-	ArrayList<Page> selectByType(String type);
+	/* (non-Javadoc)
+	 * @see service.PushService#selectByID(int)
+	 */
 
-	int deleteByID(int ID);
+	public Push selectByID(int ID) {
+		// TODO Auto-generated method stub
+		return pushMapper.selectByID(ID);
+	}
 
-	boolean existPID(int PID);
+	/* (non-Javadoc)
+	 * @see service.PushService#selectByType(java.lang.String)
+	 */
 
-	int updateTypeByID(Push push);
+	public ArrayList<Page> selectByType(String type) {
+		ArrayList<Push> pushs = pushMapper.selectByType(type);
+		ArrayList<Page> pages = new ArrayList<Page>();
+		for (Push push : pushs) {
+			pages.add(push.getPage());
+		}
+
+		return pages;
+	}
+
+	/* (non-Javadoc)
+	 * @see service.PushService#deleteByID(int)
+	 */
+
+	public int deleteByID(int ID) {
+		// TODO Auto-generated method stub
+		return pushMapper.deleteByID(ID);
+	}
+
+	public ArrayList<Push> allPush() {
+		// TODO Auto-generated method stub
+		return pushMapper.allPush();
+	}
+
+
+	public boolean existPID(int PID) {
+		// TODO Auto-generated method stub
+		return pushMapper.existPID(PID)>0;
+	}
+
+
+	public int updateTypeByID(Push push) {
+		// TODO Auto-generated method stub
+		return pushMapper.updateTypeByID(push);
+	}
+
 }

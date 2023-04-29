@@ -1,25 +1,65 @@
-package com.example.demo.service.;
+package com.example.demo.service;
 
 import java.util.ArrayList;
 
-import model.Admin;
+import com.example.demo.entity.Admin;
+import com.example.demo.mapper.AdminMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class AdminService {
-    int logIn(String account, String password);
+@Service
+public class AdminService{
+    AdminMapper adminMapper;
+    public int logIn(String account, String password) {
+        Boolean isexist = existAccount(account);
+        if (isexist) {
+            Admin admin = getAdminByAccount(account);
+            if (admin.getPassword().equals(password)) {
+                return 2;
+            }
+            return 1;
+        }
+        return 0;
+    }
 
-    int addAdmin(Admin admin);
+    public int addAdmin(Admin admin) {
+        Boolean isexist= existAccount(admin.getAccount());
+        if(isexist){
+            return 1;
+        }else{
+            adminMapper.addAdmin(admin);
+            return 2;
+        }
+    }
 
-    boolean existAccount(String account);
+    public boolean updataAdmin(Admin admin) {
+        return adminMapper.updataAdmin(admin)>0;
+    }
 
-    Admin getAdminByAccount(String account);
+    public boolean existAccount(String account) {
+        return adminMapper.isExistAccount(account)>0;
+    }
 
-    Admin getAdminByID(int ID);
+    public Admin getAdminByAccount(String account) {
+        return adminMapper.selectByAccount(account);
+    }
 
-    boolean updataAdmin(Admin admin);
+    public int deleteByID(int id){
+        return adminMapper.deleteByID(id);
+    }
 
-    int deleteByID(int id);
+    public Admin getAdminByID(int ID) {
+        return adminMapper.selectByID(ID);
+    }
 
-    ArrayList<Admin> allAdmin();
+    public	ArrayList<Admin> allAdmin() {
+        return adminMapper.allAdmin();
+    }
 
-    ArrayList<Admin> search(String keyword);
+    public ArrayList<Admin> search(String keyword) {
+        // TODO Auto-generated method stub
+        return adminMapper.search(keyword);
+    }
+
+
 }

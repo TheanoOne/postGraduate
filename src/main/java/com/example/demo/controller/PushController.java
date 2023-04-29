@@ -1,32 +1,32 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Page;
+import com.example.demo.entity.Push;
+import com.example.demo.service.AdminService;
+import com.example.demo.service.PageService;
+import com.example.demo.service.PushService;
+import com.example.demo.util.ListPage;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import model.Page;
-import model.Push;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import service.impl.AdminServiceImpl;
-import service.impl.PageServiceImpl;
-import service.impl.PushServiceImpl;
-import util.ListPage;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @Controller
 public class PushController {
 	@Autowired
-	PushServiceImpl pushService;
+	PushService pushService;
 	@Autowired
-	PageServiceImpl pageService;
+	PageService pageService;
 	@Autowired
-	AdminServiceImpl adminService;
+	AdminService adminService;
 
 	@RequestMapping("/indexpushpage")
 	public ModelAndView webdataPage(HttpServletRequest request, HttpServletResponse response) {

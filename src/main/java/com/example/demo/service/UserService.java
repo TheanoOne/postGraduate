@@ -1,56 +1,74 @@
 package com.example.demo.service;
 
-import model.User;
-
 import java.util.ArrayList;
 
+import com.example.demo.entity.User;
+import com.example.demo.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class UserService {
+	public UserMapper userDao;
 
-	/**
-	 * 用户注册
-	 */
-	public int addUser(User user);
+	public int addUser(User user) {
+		Boolean isexist= existAccount(user.getAccount());
+		if(isexist){
+			return 1;
+		}else{
+			userDao.addUser(user);
+			return 2;
+		}
+	}
 
-	/**
-	 * 登录验证
-	 */
-	public int login(String account, String password);
+	public int login(String account, String password) {
+		// 判断username是否存在
+		boolean existAccount = existAccount(account);
+		// 若username存在，验证密码
+		if (existAccount) {
+			User resUser = userDao.selectByAccount(account);
+			if(resUser.getStatus()!=0){
+				return 3;
+			}
+			if (resUser.getPassword().equals(password)) {
+				return 2;
+			}
+			return 1;
+		}
+		return 0;
+	}
 
-	/**
-	 * 检查account是否存在
-	 * 
-	 * @param account
-	 * @return
-	 */
-	public boolean existAccount(String account);
+	public boolean existAccount(String account) {
+		return userDao.existAccount(account) > 0;
+	}
 
-	/**
-	 * 获取用户信息
-	 * 
-	 * @param account
-	 * @return
-	 */
-	public User getUserByAccount(String account);
+	public User getUserById(Integer id) {
+		return userDao.selectByID(id);
+	}
 
-	/**
-	 * 获取用户信息
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public User getUserById(Integer id);
+	public int getUserCount() {
+		return userDao.getUserCount();
+	}
 
-	/**
-	 * 获取用户数
-	 */
-	public int getUserCount();
+	public boolean updateUserByID(User user) {
+		return userDao.updateByID(user);
+	}
 
-	ArrayList<User> allUser();
+	public int deleteByID(int ID) {
+		return userDao.deleteByID(ID);
+	}
 
-	ArrayList<User> search(String keyword);
+	public User getUserByAccount(String account) {
+		return userDao.selectByAccount(account);
+	}
 
+	public ArrayList<User> allUser() {
 
-	public int deleteByID(int ID);
+		return userDao.allUser();
+	}
 
-	boolean updateUserByID(User user);
+	public ArrayList<User> search(String keyword) {
+		return userDao.search(keyword);
+	}
+
 }
