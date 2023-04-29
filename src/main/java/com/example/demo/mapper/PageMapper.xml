@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.PageMapper">
+	<resultMap id="BaseResultMap" type="model.Page">
+		<id column="id" property="ID" jdbcType="INTEGER" />
+		<result column="link" property="link" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="VARCHAR" />
+		<result column="star" property="star" jdbcType="INTEGER" />
+		<result column="view" property="view" jdbcType="INTEGER" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="date" property="date" jdbcType="TIMESTAMP" />
+		<result column="uid" property="uid" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, link, title, source, star, view,content,date,uid
+	</sql>
+
+	<insert id="addPage" parameterType="model.Page">
+		insert into page (link,
+		title, source, star, view,content,date,uid)
+		values
+		(#{link,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR},
+		#{star,jdbcType=INTEGER},
+		#{view,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR},
+		#{date,jdbcType=TIMESTAMP},
+		#{uid,jdbcType=INTEGER})
+	</insert>
+
+	<select id="search" resultMap="BaseResultMap">
+		select page.* from push
+		right join page
+		on push.pid = page.id
+		where
+		page.title like #{keyword,jdbcType=VARCHAR} or page.id like #{keyword,jdbcType=VARCHAR} or
+			page.source like #{keyword,jdbcType=VARCHAR} or push.type like #{keyword,jdbcType=VARCHAR}
+	</select>
+
+	<select id="allPage" resultMap="BaseResultMap">
+		select
+		*
+		from page
+	</select>
+
+	<select id="selectByID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from page
+		where id = #{ID,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByTitle" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from page
+		where title = #{title,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByType" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from page
+		where source = #{source,jdbcType=VARCHAR}
+	</select>
+
+	<select id="existTitle" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT count(*) from page where title =
+		#{title,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByID" parameterType="java.lang.Integer">
+		delete from page
+		where id =
+		#{ID,jdbcType=INTEGER}
+	</delete>
+	<update id="updatePageView" parameterType="model.Page">
+		update page
+		set
+		view=#{view,jdbcType=INTEGER}
+		where id = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updatePageStar" parameterType="model.Page">
+		update page
+		set
+		star=#{star,jdbcType=INTEGER}
+		where id = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updatePageSourceByUID" >
+		update page
+		set
+		source=#{source,jdbcType=VARCHAR}
+		where uid = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>
