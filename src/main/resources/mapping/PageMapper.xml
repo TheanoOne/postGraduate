@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.PageMapper">
-	<resultMap id="BaseResultMap" type="model.Page">
+<mapper namespace="com.example.demo.mapper.PageMapper">
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Page">
 		<id column="id" property="ID" jdbcType="INTEGER" />
 		<result column="link" property="link" jdbcType="VARCHAR" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
 		id, link, title, source, star, view,content,date,uid
 	</sql>
 
-	<insert id="addPage" parameterType="model.Page">
+	<insert id="addPage" parameterType="com.example.demo.entity.Page">
 		insert into page (link,
 		title, source, star, view,content,date,uid)
 		values
@@ -80,13 +80,13 @@
 		where id =
 		#{ID,jdbcType=INTEGER}
 	</delete>
-	<update id="updatePageView" parameterType="model.Page">
+	<update id="updatePageView" parameterType="com.example.demo.entity.Page">
 		update page
 		set
 		view=#{view,jdbcType=INTEGER}
 		where id = #{ID,jdbcType=INTEGER}
 	</update>
-	<update id="updatePageStar" parameterType="model.Page">
+	<update id="updatePageStar" parameterType="com.example.demo.entity.Page">
 		update page
 		set
 		star=#{star,jdbcType=INTEGER}

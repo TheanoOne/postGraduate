@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.ReviewsMapper">
-	<resultMap id="BaseResultMap" type="model.Reviews">
+<mapper namespace="com.example.demo.mapper.ReviewsMapper">
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Reviews">
 		<id column="id" property="ID" jdbcType="INTEGER" />
 		<result column="userid" property="UID" jdbcType="INTEGER" />
 		<result column="pageid" property="PID" jdbcType="INTEGER" />
 		<result column="content" property="content" jdbcType="VARCHAR" />
 		<result column="date" property="date" jdbcType="TIMESTAMP" />
-		<association property="user" javaType="model.User">
+		<association property="user" javaType="com.example.demo.entity.User">
 			<id column="id" property="ID" />
 			<result column="account" property="account" jdbcType="VARCHAR" />
 			<result column="nickname" property="nickname" jdbcType="VARCHAR" />
@@ -20,7 +20,7 @@
 			<result column="status" property="status" jdbcType="INTEGER" />
 			<result column="image" property="image" jdbcType="VARCHAR" />
 		</association>
-		<association property="page" javaType="model.Page">
+		<association property="page" javaType="com.example.demo.entity.Page">
 			<id column="id" property="ID" />
 			<result column="title" property="title" />
 			<result column="source" property="source" />
@@ -28,7 +28,7 @@
 		</association>
 	</resultMap>
 
-	<insert id="addReviews" parameterType="model.Reviews">
+	<insert id="addReviews" parameterType="com.example.demo.entity.Reviews">
 		insert into reviews
 		(userid,
 		pageid, content,date)

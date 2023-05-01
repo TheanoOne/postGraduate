@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+	@Autowired
 	public UserMapper userDao;
 
 	public int addUser(User user) {

@@ -11,12 +11,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Objects;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:8081") // 允许跨域请求的源
 public class MainController {
 	@Autowired
 	AdminService adminService;
@@ -32,45 +36,40 @@ public class MainController {
 	PushService pushService;
 
 	@RequestMapping("/index")
-	public ModelAndView index() {
-		ModelAndView mov =  new ModelAndView("index");
+	public ArrayList<Page> index(HttpServletRequest request) {
 		ArrayList<Page> TJMS = pushService.selectByType("学长经验"); // 推荐免试
-		mov.addObject("TJMS",TJMS);
 
 		ArrayList<Page> KYJZ = pushService.selectByType("专硕巡展");
-		mov.addObject("KYJZ",KYJZ);
 
 		ArrayList<Page> KYZZ = pushService.selectByType("研招访谈");
-		mov.addObject("KYZZ",KYZZ);
 
 		ArrayList<Page> GJZZ = pushService.selectByType("推荐免试");
-		mov.addObject("GJZZ",GJZZ);
 
 		ArrayList<Page> XWZX = pushService.selectByType("考研资讯");
-		mov.addObject("XWZX",XWZX);
 
 		ArrayList<Page> KYZL = pushService.selectByType("调剂记录");
-		mov.addObject("KYZL",KYZL);
 
 		ArrayList<Page> BKZN = pushService.selectByType("招生简章");
-		mov.addObject("BKZN",BKZN);
 
 		ArrayList<Page> KYRC = pushService.selectByType("考研日程");
-//		System.out.println(KYRC.toString());
-		mov.addObject("KYRC",KYRC);
 
 		ArrayList<Page> KYRD = pushService.selectByType("院校政策");
-		mov.addObject("KYRD",KYRD);
 
 		ArrayList<Page> KYDD = pushService.selectByType("国家政策");
-		mov.addObject("KYDD",KYDD);
 
 		ArrayList<Page> KYGJ= pushService.selectByType("考研工具");
-		mov.addObject("KYGJ",KYGJ);
 
-		ArrayList<Page> XXXZ= pushService.selectByType("学校选择");
-		mov.addObject("XXXZ",XXXZ);
-		return mov;
+
+		String str = request.getParameter("type");
+		ArrayList<Page> List;
+		if (Objects.equals(str, "XXXZ"))
+			List = pushService.selectByType("学校选择");
+		else if (Objects.equals(str, "KYGJ")) {
+			List = pushService.selectByType("考研工具");
+		}else {
+			List = null;
+		}
+		return List;
 	}
 
 	@RequestMapping("/signinpage")

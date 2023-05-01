@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReviewsService {
+    @Autowired
     ReviewsMapper reviewsMapper;
 
     public int addReviews(Reviews reviews) {

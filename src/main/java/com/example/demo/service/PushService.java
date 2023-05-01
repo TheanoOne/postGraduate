@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PushService {
+	@Autowired
 	PushMapper pushMapper;
 	/* (non-Javadoc)
 	 * @see service.PushService#addPush(model.Push)
@@ -48,7 +49,6 @@ public class PushService {
 		for (Push push : pushs) {
 			pages.add(push.getPage());
 		}
-
 		return pages;
 	}
 

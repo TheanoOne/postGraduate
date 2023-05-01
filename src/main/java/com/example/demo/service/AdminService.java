@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService{
+    @Autowired
     AdminMapper adminMapper;
     public int logIn(String account, String password) {
         Boolean isexist = existAccount(account);

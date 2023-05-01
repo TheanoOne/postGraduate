@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FavoriteService {
+	@Autowired
 	FavoriteMapper favoriteMapper;
 
 	public int addFavorite(Favorite favorite) {

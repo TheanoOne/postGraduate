@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.PushMapper">
-	<resultMap id="BaseResultMap" type="model.Push">
+<mapper namespace="com.example.demo.mapper.PushMapper">
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Push">
 		<id column="id" property="ID" jdbcType="INTEGER" />
 		<id column="pid" property="PID" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="VARCHAR" />
-		<association property="page" javaType="model.Page">
+		<association property="page" javaType="com.example.demo.entity.Page">
 			<id column="id" property="ID" />
 			<result column="link" property="link" jdbcType="VARCHAR" />
 			<result column="title" property="title" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
 		</association>
 	</resultMap>
 
-	<insert id="addPush" parameterType="model.Push">
+	<insert id="addPush" parameterType="com.example.demo.entity.Push">
 		insert into push (pid,type)
 		select #{PID,jdbcType=INTEGER},#{type,jdbcType=VARCHAR} from dual
 		                          where not exists(select * from push where pid = #{PID,jdbcType=INTEGER} and type = #{type,jdbcType=VARCHAR})
@@ -31,7 +31,7 @@
 		type like #{keyword,jdbcType=VARCHAR}
 	</select>
 
-	<update id="updateTypeByID" parameterType="model.Push">
+	<update id="updateTypeByID" parameterType="com.example.demo.entity.Push">
 		update push
 		set
 		type=#{type,jdbcType=VARCHAR}
@@ -53,7 +53,7 @@
 	</select>
 
 	<select id="selectByType" resultMap="BaseResultMap"
-		parameterType="model.Push">
+		parameterType="com.example.demo.entity.Push">
 		select
 		push.type,page.*
 		from push,page where push.pid=page.id

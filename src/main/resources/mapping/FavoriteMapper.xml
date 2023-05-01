@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.FavoriteMapper">
-	<resultMap id="BaseResultMap" type="model.Favorite">
+<mapper namespace="com.example.demo.mapper.FavoriteMapper">
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Favorite">
 		<id column="id" property="ID" jdbcType="INTEGER" />
 		<result column="userid" property="UID" jdbcType="INTEGER" />
 		<result column="pageid" property="PID" jdbcType="INTEGER" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
-		<association property="user" javaType="model.User">
+		<association property="user" javaType="com.example.demo.entity.User">
 			<id column="id" property="ID" />
 			<result column="account" property="account" jdbcType="VARCHAR" />
 			<result column="nickname" property="nickname" jdbcType="VARCHAR" />
 		</association>
-		<association property="page" javaType="model.Page">
+		<association property="page" javaType="com.example.demo.entity.Page">
 			<id column="id" property="ID" />
 			<result column="title" property="title" />
 			<result column="source" property="source" />
@@ -19,7 +19,7 @@
 		</association>
 	</resultMap>
 
-	<insert id="addFavorite" parameterType="Favorite">
+	<insert id="addFavorite" parameterType="com.example.demo.entity.Favorite">
 		insert into favorite (userid, pageid,title)
 		values
 		(#{UID,jdbcType=INTEGER},#{PID,jdbcType=INTEGER},#{title,jdbcType=INTEGER})
